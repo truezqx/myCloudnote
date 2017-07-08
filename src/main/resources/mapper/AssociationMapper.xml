@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.zqx.dao.AssociationDao">
+	<select id="findById" parameterType="String" resultMap="bookMap1">
+		select * from cn_notebook 
+		where cn_notebook_id=#{bookId}
+	</select>
+	<resultMap type="cn.zqx.entity.Notebook" id="bookMap1">
+		<!-- 名称一致可以省略book属性加载 -->
+		<!-- 指定user属性的加载 -->
+		<association property="user" javaType="cn.zqx.entity.User" 
+		select="findUser" column="cn_user_id">
+		</association>
+	</resultMap>
+	<select id="findUser" parameterType="String" resultType="cn.zqx.entity.User">
+		SELECT * FROM cn_user
+		WHERE cn_user_id=#{userId}
+	</select>
+	<select id="findAllBook" resultMap="bookMap1">
+		select * from cn_notebook
+	</select>
+</mapper>

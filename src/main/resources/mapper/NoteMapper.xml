@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.zqx.dao.NoteDao">
+	<select id="findNotesByBookId" parameterType="String" resultType="cn.zqx.entity.Note">
+		SELECT 
+			*
+		FROM
+			cn_note
+		WHERE
+			cn_notebook_id=#{bookId}
+		ORDER BY
+			cn_note_create_time
+		DESC
+	</select>
+	<select id="findNotesById" parameterType="String" resultType="map">
+		SELECT 
+			cn_note_id,cn_note_title,cn_note_type_id
+		FROM
+			cn_note
+		WHERE
+			cn_notebook_id=#{bookId}
+		AND
+			cn_note_status_id='1'
+		ORDER BY
+			cn_note_create_time
+		DESC	
+	</select>
+	<select id="findNoteById" parameterType="String" resultType="cn.zqx.entity.Note">
+		SELECT
+			*
+		FROM
+			cn_note
+		WHERE
+			cn_note_id=#{noteId}
+	</select>
+	<update id="updateNoteById" parameterType="cn.zqx.entity.Note">
+		UPDATE 
+			cn_note
+		SET
+			cn_note_title=#{cn_note_title},
+			cn_note_body=#{cn_note_body},
+			cn_note_last_modify_time=#{cn_note_last_modify_time}
+		WHERE
+			cn_note_id=#{cn_note_id}
+	</update>
+	<insert id="addNote" parameterType="cn.zqx.entity.Note">
+		INSERT INTO
+			cn_note
+			(cn_user_id,
+			cn_notebook_id,
+			cn_note_id,
+			cn_note_status_id,
+			cn_note_type_id,
+			cn_note_title,
+			cn_note_body,
+			cn_note_create_time,
+			cn_note_last_modify_time)
+		VALUES
+			(#{cn_user_id},
+			#{cn_notebook_id},
+			#{cn_note_id},
+			#{cn_note_status_id},
+			#{cn_note_type_id},
+			#{cn_note_title},
+			#{cn_note_body},
+			#{cn_note_create_time},
+			#{cn_note_last_modify_time})
+	</insert>
+	<update id="removeNote" parameterType="cn.zqx.entity.Note">
+		UPDATE
+			cn_note
+		SET
+			cn_note_status_id=#{cn_note_status_id},
+			cn_note_type_id="1",
+			cn_note_last_modify_time=#{cn_note_last_modify_time}
+		WHERE
+			cn_note_id=#{cn_note_id}
+	</update>
+	<update id="moveNote" parameterType="cn.zqx.entity.Note">
+		UPDATE
+			cn_note
+		SET
+			cn_notebook_id=#{cn_notebook_id},
+			cn_note_last_modify_time=#{cn_note_last_modify_time}
+		WHERE
+			cn_note_id=#{cn_note_id}
+	</update>
+	<update id="shareNote" parameterType="cn.zqx.entity.Note">
+		UPDATE
+			cn_note
+		SET
+			cn_note_type_id=#{cn_note_type_id},
+			cn_note_last_modify_time=#{cn_note_last_modify_time}
+		WHERE
+			cn_note_id=#{cn_note_id}
+	</update>
+	<select id="findRollbackNote" parameterType="String" resultType="cn.zqx.entity.Note">
+		SELECT
+			cn_note_id,
+			cn_note_title
+		FROM
+			cn_note
+		WHERE
+			cn_note_status_id="2"
+	</select>
+</mapper>

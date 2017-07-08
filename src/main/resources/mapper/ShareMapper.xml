@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.zqx.dao.ShareDao">
+	<insert id="addShareNote" parameterType="cn.zqx.entity.Share">
+		INSERT INTO
+			cn_share
+			(cn_share_id,
+			cn_share_title,
+			cn_share_body,
+			cn_note_id)
+		VALUES
+			(#{cn_share_id},
+			#{cn_share_title},
+			#{cn_share_body},
+			#{cn_note_id})
+	</insert>
+	<select id="findByNoteId" parameterType="String" resultType="cn.zqx.entity.Share">
+		SELECT
+			*
+		FROM
+			cn_share
+		WHERE	
+			cn_note_id=#{noteId}
+		
+	</select>
+	<select id="findLikeTitle" parameterType="map" resultType="cn.zqx.entity.Share">
+		SELECT
+			*
+		FROM
+			cn_share
+		WHERE
+			cn_share_title 
+		LIKE 
+			#{keyword}
+		LIMIT
+			#{begin},8
+		
+	</select>
+	<select id="findById" parameterType="String" resultType="cn.zqx.entity.Share">
+		SELECT
+			*
+		FROM
+			cn_share
+		WHERE
+			cn_share_id=#{shareId}
+	</select>
+</mapper>

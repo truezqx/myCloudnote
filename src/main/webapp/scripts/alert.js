@@ -59,7 +59,15 @@ function alertMoveNote(){
 
 function alertReplayNote(){
 	$("#can").load("alert/alert_replay.html",function(){
-		
+		var $li = $("#rollback_ul a.checked").parent();
+		//获得选中Note信息
+		var noteId=$li.data("noteId");
+		var bookId=$li.data("bookId");
+		var bookName=$li.data("bookName");
+		//添加option
+		var sopt='';
+		sopt+="<option value="+"'"+bookId+"'"+">"+ bookName+"</option>";
+		$("#replaySelect").append(sopt);
 	});
 	$(".opacity_bg").show();
 }

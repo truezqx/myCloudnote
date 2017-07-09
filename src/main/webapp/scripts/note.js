@@ -366,15 +366,17 @@
 										var noteTitle = notes[i].cn_note_title;
 										var noteId = notes[i].cn_note_id;
 										var bookId = notes[i].cn_notebook_id;
+										var bookName=notes[i].notebook.cn_notebook_name;
 										var sli='';
 										sli+='<li class="disable"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>'+ noteTitle+'<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button><button type="button" class="btn btn-default btn-xs btn_position_2 btn_replay"><i class="fa fa-reply"></i></button></a></li>';
 										var $li=$(sli);
-										$li.data("niteId",noteId);
+										$li.data("noteId",noteId);
 										$li.data("bookId",bookId);
+										$li.data("bookName",bookName);
 										$("#rollback_ul").append($li);
 									}
 								}else{
-									alert(result.message);
+									alert("获取回收站笔记失败");
 								}
 							},
 							error:function(){

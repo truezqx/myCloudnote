@@ -96,14 +96,26 @@
 		WHERE
 			cn_note_id=#{cn_note_id}
 	</update>
-	<select id="findRollbackNote" parameterType="String" resultType="cn.zqx.entity.Note">
+	<select id="findRollbackNote" parameterType="String" resultMap="noteMap1">
 		SELECT
-			cn_note_id,
-			cn_note_title
+			*
 		FROM
 			cn_note
 		WHERE
-			cn_note_status_id="2"
+			cn_user_id=#{userId}
+		AND
+			cn_note_status_id='2'
 	</select>
-	
+	<resultMap type="cn.zqx.entity.Note" id="noteMap1">
+		<association property="notebook" javaType="cn.zqx.entity.Notebook" 
+		select="findNotebook" column="cn_notebook_id"></association>
+	</resultMap>
+	<select id="findNotebook" parameterType="String" resultType="cn.zqx.entity.Notebook">
+		SELECT
+			*
+		FROM
+			cn_notebook
+		WHERE
+			cn_notebook_id=#{bookId}
+	</select>
 </mapper>

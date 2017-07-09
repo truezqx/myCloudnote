@@ -15,11 +15,15 @@ public class Note implements Serializable{
 	private Long cn_note_create_time;
 	private Long cn_note_last_modify_time;
 	
+	private Notebook notebook;
+	
 	public Note(){}
+
+	
 
 	public Note(String cn_note_id, String cn_notebook_id, String cn_user_id, String cn_note_status_id,
 			String cn_note_type_id, String cn_note_title, String cn_note_body, Long cn_note_create_time,
-			Long cn_note_last_modify_time) {
+			Long cn_note_last_modify_time, Notebook notebook) {
 		super();
 		this.cn_note_id = cn_note_id;
 		this.cn_notebook_id = cn_notebook_id;
@@ -30,6 +34,17 @@ public class Note implements Serializable{
 		this.cn_note_body = cn_note_body;
 		this.cn_note_create_time = cn_note_create_time;
 		this.cn_note_last_modify_time = cn_note_last_modify_time;
+		this.notebook = notebook;
+	}
+
+
+
+	public Notebook getNotebook() {
+		return notebook;
+	}
+
+	public void setNotebook(Notebook notebook) {
+		this.notebook = notebook;
 	}
 
 	public String getCn_note_id() {
@@ -108,13 +123,18 @@ public class Note implements Serializable{
 		return serialVersionUID;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Note [cn_note_id=" + cn_note_id + ", cn_notebook_id=" + cn_notebook_id + ", cn_user_id=" + cn_user_id
 				+ ", cn_note_status_id=" + cn_note_status_id + ", cn_note_type_id=" + cn_note_type_id
 				+ ", cn_note_title=" + cn_note_title + ", cn_note_body=" + cn_note_body + ", cn_note_create_time="
-				+ cn_note_create_time + ", cn_note_last_modify_time=" + cn_note_last_modify_time + "]";
+				+ cn_note_create_time + ", cn_note_last_modify_time=" + cn_note_last_modify_time + ", notebook="
+				+ notebook + "]";
 	}
+
+
 
 	@Override
 	public int hashCode() {

@@ -103,6 +103,10 @@
 				});
 				//恢复选中回收站笔记
 				$("#rollback_ul").on("click",".btn_replay",alertReplayNote);
+				//恢复笔记
+				$("#can").on("click","#replay_note",function(){
+					alert("----");
+				});
 				//收藏笔记界面显示
 				$("#like_button").click(function(){
 					$("#pc_part_2").hide();

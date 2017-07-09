@@ -384,6 +384,32 @@
 							}
 						});
 					}
+				}
+				//恢复笔记
+				function replayNote(){
+					var noteId=$("#replaySelect").val().trim();
+					var userId=getCookie("userId");
+					if(userId==""){
+						Window.location.href("log_in.html");
+					}else{
+						$.ajax({
+							url:path+"/note/replay.do",
+							type:"post",
+							data:{"noteId":noteId},
+							dataType:"json",
+							success:function(result){
+								if(result.state==0){
+									var $li = $("#rollback_ul a.checked").parent();
+									$li.remove();
+									alert("恢复成功");
+								}else{
+									alert("恢复笔记失败");
+								}
+							},
+							error:function(){
+								alert("服务器异常,恢复笔记失败");
+							}
+						});
+					}
 					
-
 				}

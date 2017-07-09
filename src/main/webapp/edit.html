@@ -101,11 +101,35 @@
 					$(this).find("a").addClass("checked");
 					
 				});
-				//恢复选中回收站笔记
+				//弹出恢复笔记对话框
 				$("#rollback_ul").on("click",".btn_replay",alertReplayNote);
 				//恢复笔记
-				$("#can").on("click","#replay_note",function(){
-					alert("----");
+				$("#can").on("click","#replay_note",replayNote);
+				//弹出彻底删除笔记对话框
+				$("#rollback_ul").on("click",".btn_delete",alertDeleteRollback);
+				//彻底删除笔记
+				$("#can").on("click",".sure",function(){
+					var userId=getCookie("userId");
+					var $li = $("#rollback_ul a.checked").parent();
+					var noteId=$li.data("noteId");
+					alert(noteId);
+					if(userId==""){
+						Window.location.href("log_in.html");
+					}else{
+						$.ajax({
+							url:path+"/note/deleteNote.do",
+							type:"post",
+							data:{"userId":userId},
+							dataType:"json",
+							success:function(result){
+								
+							},
+							error:function(){
+								alert("服务器异常,删除失败")
+							}
+								
+						});
+					}
 				});
 				//收藏笔记界面显示
 				$("#like_button").click(function(){

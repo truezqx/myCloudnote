@@ -123,6 +123,19 @@ public class NoteServiceImpl implements NoteService{
 		return notes;
 	}
 
+	public Note replayNote(String noteId) {
+		int rows = noteDao.replayNote(noteId);
+		if(rows>=1){
+			return  noteDao.findNoteById(noteId);
+		}
+		return null;
+	}
+
+	public boolean deleteById(String noteId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 	
 

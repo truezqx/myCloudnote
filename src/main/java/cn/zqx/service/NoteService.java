@@ -12,8 +12,9 @@ public interface NoteService {
 	Note addNote(String userId,String bookId,String noteTitle);
 	Note removeNote(String userId,String noteId);
 	Note moveNote(String userId,String noteId,String bookId);
-
 	List<Note> loadRollbackNote(String userId);
+	Note replayNote(String noteId);
+	boolean deleteById(String noteId);
 
 	
 }

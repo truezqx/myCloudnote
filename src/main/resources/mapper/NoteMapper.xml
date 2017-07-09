@@ -118,4 +118,19 @@
 		WHERE
 			cn_notebook_id=#{bookId}
 	</select>
+	<update id="replayNote" parameterType="String" >
+		UPDATE
+			cn_note
+		SET
+			cn_note_status_id="1"
+		WHERE
+			cn_note_id=#{noteId}
+	</update>
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM
+			cn_note
+		WHERE
+			cn_note_id=#{noteId}
+		
+	</delete>
 </mapper>

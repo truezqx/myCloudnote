@@ -66,6 +66,13 @@ public class NoteController extends BaseController{
 		List<Note> notes = noteService.loadRollbackNote(userId);
 		return new JsonResult(notes);
 	}
+	
+	@RequestMapping("/replay.do")
+	@ResponseBody
+	public JsonResult replay(String noteId){
+		Note note = noteService.replayNote(noteId);
+		return new JsonResult(note);
+	}
 
 
 }

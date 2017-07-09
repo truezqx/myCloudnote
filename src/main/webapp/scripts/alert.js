@@ -56,9 +56,11 @@ function alertMoveNote(){
 	$(".opacity_bg").show();
 	
 }
+
 function alertReplayNote(){
 	$("#can").load("alert/alert_replay.html",function(){
 		
 	});
 	$(".opacity_bg").show();
 }
+

@@ -47,7 +47,7 @@ public class NoteServiceImpl implements NoteService{
 		note.setCn_note_body(body);
 		Long time = System.currentTimeMillis();
 		note.setCn_note_last_modify_time(time);
-		System.out.println(note);
+		//System.out.println(note);
 		int row= noteDao.updateNoteById(note);
 		return row==1;
 	}
@@ -76,7 +76,7 @@ public class NoteServiceImpl implements NoteService{
 			throw new UserNotFoundException("用户ID为空");
 		}
 		Note note = noteDao.findNoteById(noteId);
-		System.out.println(userId+"   "+note.getCn_user_id());
+		//System.out.println(userId+"   "+note.getCn_user_id());
 		if(note.getCn_user_id().equals(userId)){
 			note = new Note();
 			note.setCn_note_id(noteId);

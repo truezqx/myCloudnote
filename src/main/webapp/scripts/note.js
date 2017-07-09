@@ -420,3 +420,36 @@
 					}
 					
 				}
+				//彻底删除笔记
+				function deleteNote(){
+					var userId=getCookie("userId");
+					var $li = $("#rollback_ul a.checked").parent();
+					var noteId=$li.data("noteId");
+					alert(noteId);
+					if(userId==""){
+						Window.location.href("log_in.html");
+					}else{
+						$.ajax({
+							url:path+"/note/deleteNote.do",
+							type:"post",
+							data:{"userId":userId,"noteId":noteId},
+							dataType:"json",
+							success:function(result){
+								if(result.state==0){
+									if(result.data==true){
+										$li.remove();
+										alert("删除成功");
+									}else{
+										alert("删除失败");
+									}
+								}else{
+									alert("服务器异常");
+								}
+							},
+							error:function(){
+								alert("服务器异常,删除失败");
+							}
+								
+						});
+					}
+				}

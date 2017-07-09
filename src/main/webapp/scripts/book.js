@@ -47,7 +47,7 @@ function createBookLi(bookId,bookName){
 	 var $li = $(sli);
 	 $li.data("bookId",bookId);
 	 //将li元素添加到ul列表中
-	 $("#book_ul").append($li);
+	 $("#book_ul").prepend($li);
 }
 
 function addNotebook(){

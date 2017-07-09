@@ -59,6 +59,7 @@ public class NoteController extends BaseController{
 		Note note = noteService.moveNote(userId, noteId, bookId);
 		return new JsonResult(note);
 	}
+<<<<<<< HEAD
 	
 	@RequestMapping("/loadRollbackNote.do")
 	@ResponseBody
@@ -66,6 +67,8 @@ public class NoteController extends BaseController{
 		List<Note> notes = noteService.loadRollbackNote(userId);
 		return new JsonResult(notes);
 	}
+=======
+>>>>>>> fc90f2bb076afaea5d2ab7b18d2847123e681584
 
 
 }

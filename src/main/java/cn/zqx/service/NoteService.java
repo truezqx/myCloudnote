@@ -12,8 +12,11 @@ public interface NoteService {
 	Note addNote(String userId,String bookId,String noteTitle);
 	Note removeNote(String userId,String noteId);
 	Note moveNote(String userId,String noteId,String bookId);
+<<<<<<< HEAD
 
 	List<Note> loadRollbackNote(String userId);
 
+=======
+>>>>>>> fc90f2bb076afaea5d2ab7b18d2847123e681584
 	
 }

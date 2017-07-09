@@ -57,6 +57,7 @@ function alertMoveNote(){
 	
 }
 
+<<<<<<< HEAD
 function alertReplayNote(){
 	$("#can").load("alert/alert_replay.html",function(){
 		
@@ -64,3 +65,5 @@ function alertReplayNote(){
 	$(".opacity_bg").show();
 }
 
+=======
+>>>>>>> fc90f2bb076afaea5d2ab7b18d2847123e681584

@@ -115,7 +115,6 @@ public class NoteServiceImpl implements NoteService{
 		}
 	}
 
-<<<<<<< HEAD
 	public List<Note> loadRollbackNote(String userId) {
 		if(userId==null||userId.trim().isEmpty()){
 			throw new UserNotFoundException("用户ID为空");
@@ -125,8 +124,6 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 
-=======
->>>>>>> fc90f2bb076afaea5d2ab7b18d2847123e681584
 	
 
 }

@@ -14,9 +14,6 @@ public interface NoteDao {
 	public int removeNote(Note note);
 	public int moveNote(Note note);
 	public int shareNote(Note note);
-<<<<<<< HEAD
 	public List<Note> findRollbackNote(String userId);
 
-=======
->>>>>>> fc90f2bb076afaea5d2ab7b18d2847123e681584
 }

@@ -131,9 +131,13 @@ public class NoteServiceImpl implements NoteService{
 		return null;
 	}
 
-	public boolean deleteById(String noteId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteById(String userId,String noteId) {
+		if(userId==null||userId.trim().isEmpty()){
+			throw new UserNotFoundException("用户ID为空");
+		}
+		int rows = noteDao.deleteById(noteId);
+		
+		return rows>=1;
 	}
 
 

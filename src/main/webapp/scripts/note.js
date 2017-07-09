@@ -33,6 +33,11 @@
 										$li.find(".fa-file-text-o").after(img);
 									}
 								}
+								/*
+								//默认选中第一个笔记
+								var $li = $("#note_ul li:first");
+								$li.find("a").addClass("checked");
+								*/
 								
 							}
 						},
@@ -348,6 +353,8 @@
 					$("#pc_part_7").hide();
 					$("#pc_part_8").hide();
 					$("#pc_part_4").show();
+					$("#pc_part_3").hide();
+					$("#pc_part_5").show();
 					var userId = getCookie("userId");
 					if(userId==""){
 						Window.location.href("log_in.html");

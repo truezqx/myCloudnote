@@ -73,6 +73,13 @@ public class NoteController extends BaseController{
 		Note note = noteService.replayNote(noteId);
 		return new JsonResult(note);
 	}
+	
+	@RequestMapping("/deleteNote.do")
+	@ResponseBody
+	public JsonResult deleteNote(String userId,String noteId){
+		boolean success = noteService.deleteById(userId, noteId);
+		return new JsonResult(success);
+	}
 
 
 }

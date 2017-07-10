@@ -16,7 +16,7 @@ import cn.zqx.util.JsonResult;
 
 @Controller
 @RequestMapping("/book")
-public class NotebookController {
+public class NotebookController extends BaseController{
 	
 	@Resource
 	private NotebookService notebookService;

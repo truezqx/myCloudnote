@@ -76,7 +76,7 @@ function addNotebook(){
 					closeWindow();
 					createBookLi(bookId,bookName);
 				}else {
-					alert(result.message);
+					alert("创建笔记本失败");
 				}
 			},
 			error:function(){

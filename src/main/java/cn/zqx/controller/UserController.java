@@ -2,6 +2,7 @@ package cn.zqx.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +15,9 @@ import cn.zqx.util.JsonResult;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
+	private static Logger log=Logger.getLogger(UserController.class); 
+	
 	@Resource
 	private UserService userService;
 	

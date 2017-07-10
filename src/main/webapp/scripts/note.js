@@ -206,7 +206,7 @@
 								$li.remove();
 								alert("移动至回收站");
 							}else{
-								alert(result.message);
+								alert("删除笔记失败！");
 							}
 						},
 						error:function(){
@@ -238,7 +238,7 @@
 									$li.remove();
 									alert("笔记移动成功");
 								}else{
-									alert(result.message);
+									alert("移动笔记失败！");
 								}
 							},
 							"error":function(){
@@ -267,7 +267,7 @@
 									$li.find(".fa-file-text-o").after(img);
 									alert("分享成功");
 								}else{
-									alert(result.message);
+									alert("服务器异常，分享失败");
 								}
 							},
 							error:function(){
@@ -335,7 +335,7 @@
 									//显示body
 									$("#noput_note_title").next().html(shareBody);
 								}else{
-									alert(result.message);
+									alert("加载笔记失败");
 								}
 							},
 							error:function(){

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.zqx.util.JsonResult;
 
 public abstract class BaseController {
+	
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
 	public JsonResult exceptionHandle(Exception e) {

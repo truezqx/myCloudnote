@@ -18,4 +18,5 @@ public interface NoteDao {
 	public int replayNote(String noteId);
 	public int deleteById(String noteId);
 	public List<Note> likeNote(String userId);
+	
 }

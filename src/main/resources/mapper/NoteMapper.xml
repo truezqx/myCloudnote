@@ -144,4 +144,5 @@
 		AND
 			cn_note_status_id="3"
 	</select>
+	
 </mapper>

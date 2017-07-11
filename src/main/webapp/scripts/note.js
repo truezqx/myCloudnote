@@ -567,13 +567,14 @@
 						var $li = $("#like_ul a.checked").parent();
 						var noteId=$li.data("noteId");
 						$.ajax({
-							url:path+"/note/deleteLike.do",
+							url:path+"/note/deleteNote.do",
 							type:"post",
-							data:{"noteId":noteId},
+							data:{"userId":userId,"noteId":noteId},
 							dataType:"json",
 							success:function(result){
 								if(result.state==0){
-									
+									$li.remove();
+									alert("删除成功")
 								}else{
 									alert("服务器异常,删除失败");
 								}
@@ -583,4 +584,34 @@
 							}
 						});
 					}
+				}
+				
+				function loadRollback(){
+					$("#pc_part_3").hide();
+					$("#pc_part_5").show();
+					$("#rollback_ul a.checked").removeClass("checked");
+					$(this).find("a").addClass("checked");
+					var $li =$("#rollback_ul a.checked").parent();
+					var noteId=$li.data("noteId");
+					$.ajax({
+						url:path+"/note/getNote.do",
+						type:"post",
+						data:{"noteId":noteId},
+						dataType:"json",
+						success:function(result){
+							if(result.state==0){
+								var title = result.data.cn_note_title;
+								var body = result.data.cn_note_body;
+								$("#noput_note_title").html(title);
+								//显示body
+								$("#noput_note_title").next().html(body);
+							}else{
+								alert("获取笔记内容失败");
+							}
+						},
+						error:function(){
+							alert("获取笔记内容失败");
+						}
+					});
+					
 				}

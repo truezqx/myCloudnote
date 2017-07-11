@@ -150,7 +150,6 @@ public class NoteServiceImpl implements NoteService{
 		}
 		Share share = shareDao.findById(shareId);
 		String noteId=share.getCn_note_id();
-		System.out.println(noteId);
 		Note note = noteDao.findNoteById(noteId);
 		if(userId.equals(note.getCn_user_id())){
 			throw new UserNotFoundException("笔记已收藏或已在笔记列表中");
@@ -181,6 +180,6 @@ public class NoteServiceImpl implements NoteService{
 		
 		return notes;
 	}
-	
+
 
 }

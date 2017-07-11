@@ -133,4 +133,15 @@
 			cn_note_id=#{noteId}
 		
 	</delete>
+	<select id="likeNote" parameterType="String" resultType="cn.zqx.entity.Note">
+		SELECT 
+			cn_note_id,
+			cn_note_title
+		FROM
+			cn_note
+		WHERE
+			cn_user_id=#{userId}
+		AND
+			cn_note_status_id="3"
+	</select>
 </mapper>

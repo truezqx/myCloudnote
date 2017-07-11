@@ -28,7 +28,7 @@
 									createNoteLi(noteId,noteTitle);
 									var typeId=notes[i].cn_note_type_id;
 									if(typeId=="2"){
-										var img = '<i class="fa fa-star"></i>';
+										var img = '<i class="fa fa-sitemap"></i>';
 										var $li=$("#note_ul li:last");
 										$li.find(".fa-file-text-o").after(img);
 									}
@@ -89,7 +89,7 @@
 							alert("标题不能为空！");
 					}else{
 						$.ajax({
-							url:path+"/note/updateNote.do",
+							url:path+"/note/updaloadLikeNotete.do",
 							type:"post",
 							data:{"noteId":noteId,"title":title,"body":body},
 							dataType:"json",
@@ -124,7 +124,7 @@
 					var ok=true;
 					if(userId==""){
 						ok=false;
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}
 					if(noteTitle==""){
 						ok=false;
@@ -193,7 +193,7 @@
 					var noteId=$li.data("noteId");
 					var userId=getCookie("userId");
 					if(userId==null){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}
 					$.ajax({
 						url:path+"/note/removeNote.do",
@@ -222,7 +222,7 @@
 					var bookId = $("#moveSelect").val().trim();
 					var userId = getCookie("userId");
 					if(userId==""){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}
 					if(bookId=="none"){
 						$("#moveSelect_span").html("请选择一个笔记本!");
@@ -254,7 +254,7 @@
 					var noteId = $li.data("noteId");
 					var userId = getCookie("userId");
 					if(userId==""){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}else{
 						$.ajax({
 							url:path+"/share/shareNote.do",
@@ -263,7 +263,7 @@
 							dataType:"json",
 							success:function(result){
 								if(result.state==0){
-									var img='<i class="fa fa-star"></i>';
+									var img='<i class="fa fa-sitemap"></i>';
 									$li.find(".fa-file-text-o").after(img);
 									alert("分享成功");
 								}else{
@@ -294,7 +294,7 @@
 									var sli="";
 									sli+='<li class="online">';
 									sli+='<a  >';
-									sli+='	<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>' +shareTitle+'<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-star"></i></button>';
+									sli+='	<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>' +shareTitle+'<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down" id="like_note"><i class="fa fa-star"></i></button>';
 									sli+='</a>';
 									sli+='</li>';
 									var $li = $(sli);
@@ -309,7 +309,7 @@
 						}
 					});
 				}
-				
+				//加载分享笔记
 				function loadShareNote(){
 					$("#share_ul a").removeClass("checked");
 					$(this).find("a").addClass("checked");
@@ -319,7 +319,7 @@
 					var shareId = $li.data("shareId");
 					var userId = getCookie("userId");
 					if(userId==""){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}else{
 						$.ajax({
 							url:path+"/share/loadShareNote.do",
@@ -357,7 +357,7 @@
 					$("#pc_part_5").show();
 					var userId = getCookie("userId");
 					if(userId==""){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}else{
 						$.ajax({
 							url:path+"/note/loadRollbackNote.do",
@@ -397,7 +397,7 @@
 					var noteId=$("#replaySelect").val().trim();
 					var userId=getCookie("userId");
 					if(userId==""){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}else{
 						$.ajax({
 							url:path+"/note/replay.do",
@@ -427,7 +427,7 @@
 					var noteId=$li.data("noteId");
 					alert(noteId);
 					if(userId==""){
-						Window.location.href("log_in.html");
+						window.location.href("log_in.html");
 					}else{
 						$.ajax({
 							url:path+"/note/deleteNote.do",
@@ -450,6 +450,137 @@
 								alert("服务器异常,删除失败");
 							}
 								
+						});
+					}
+				}
+				
+				//收藏笔记
+				function likeNote(){
+					var userId=getCookie("userId");
+					var $li = $("#share_ul a.checked").parent();
+					var shareId=$li.data("shareId");
+					if(userId==""){
+						window.location.href("log_in.html");
+					}else{
+						$.ajax({
+							url:path+"/note/likeNote.do",
+							type:"post",
+							data:{"userId":userId,"shareId":shareId},
+							dataType:"json",
+							success:function(result){
+								if(result.state==0){
+									alert("收藏成功");
+								}else if(result.state==8){
+									alert(result.message);
+								}else{
+									alert("服务器异常，收藏失败");
+								}
+							},
+							error:function(){
+								alert("收藏失败");
+							}
+						});
+					}
+				}
+				//加载收藏笔记
+				function loadLikeNote(){
+					$("#pc_part_2").hide();
+					$("#pc_part_4").hide();
+					$("#pc_part_6").hide();
+					$("#pc_part_8").hide();
+					$("#pc_part_7").show();
+					var userId = getCookie("userId");
+					$.ajax({
+						url:path+"/note/showLikeNote.do",
+						type:"post",
+						data:{"userId":userId},
+						dataType:"json",
+						success:function(result){
+							if(result.state==0){
+								$("#like_ul li").remove();
+								var notes = result.data;
+								for(var i=0;i<notes.length;i++){
+									var noteId=notes[i].cn_note_id;
+									var title = notes[i].cn_note_title;
+									var sli="";
+									sli+='<li class="online">';
+									sli+='<a  >';
+									sli+='	<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i>' +title+'<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down" id="like_note"><i class="fa fa-star"></i></button>';
+									sli+='</a>';
+									sli+='</li>';
+									var $li = $(sli);
+									$li.data("noteId",noteId);
+									$("#like_ul").append($li);
+								}
+							}else{
+								alert("服务器异常，获取收藏列表失败");
+							}
+						},
+						error:function(){
+							alert("获取收藏列表失败");
+						}
+					});
+				}
+				
+				//显示收藏笔记内容
+				function showLikeNote(){
+					$("#like_ul a.checked").removeClass("checked");
+					$(this).find("a").addClass("checked");
+					$("#pc_part_3").hide();
+					$("#pc_part_5").show();
+					var userId=getCookie("userId");
+					if(userId==""){
+						window.location.href("log_in.html");
+					}else{
+						var $li = $("#like_ul a.checked").parent();
+						var noteId = $li.data("noteId");
+						$.ajax({
+							url:path+"/note/getNote.do",
+							type:"post",
+							data:{"noteId":noteId},
+							dataType:"json",
+							success:function(result){
+								if(result.state==0){
+									var title = result.data.cn_note_title;
+									var body = result.data.cn_note_body;
+									//显示标题
+									$("#noput_note_title").html(title);
+									//显示body
+									$("#noput_note_title").next().html(body);
+								}else{
+									alert("服务器异常，获取笔记内容失败！");
+								}
+							},
+							error:function(){
+								alert("获取笔记内容失败！");
+							}
+						});
+					}
+					
+				}
+				//取消收藏
+				function deleteLike(){
+					var userId=getCookie("userId");
+					if(userId==""){
+						window.location.href("log_in.html");
+					}else{
+						var $li = $("#like_ul a.checked").parent();
+						var noteId=$li.data("noteId");
+						$.ajax({
+							url:path+"/note/deleteLike.do",
+							type:"post",
+							data:{"noteId":noteId},
+							dataType:"json",
+							success:function(result){
+								if(result.state==0){
+									
+								}else{
+									alert("服务器异常,删除失败");
+								}
+							},
+							error:function(){
+								alert("删除失败");
+							}
 						});
 					}
 				}

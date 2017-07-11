@@ -14,6 +14,15 @@
         <link rel="stylesheet" href="styles/icon.css"/>
         <link rel="stylesheet" href="styles/main.css"/>
         <link rel="stylesheet" href="styles/prettify.css"/>
+        
+        <script type="text/javascript">
+        	$(function(){
+        		//获取用户名
+        		var username = getCookie("username");
+        		$(".profile-username").text(username);
+        	});
+        
+        </script>
     </head>
     <body class="animated fadeIn">
         <header class="header">

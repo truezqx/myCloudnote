@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.zqx.entity.Note;
 import cn.zqx.service.NoteService;
+import cn.zqx.service.UserNotFoundException;
 import cn.zqx.util.JsonResult;
 
 @Controller
@@ -81,5 +82,26 @@ public class NoteController extends BaseController{
 		return new JsonResult(success);
 	}
 
-
+	@RequestMapping("/likeNote.do")
+	@ResponseBody
+	public JsonResult likeNote(String userId,String shareId){
+		try{
+			Note note = noteService.likeNote(userId, shareId);
+			return new JsonResult(note);
+		}catch(UserNotFoundException e){
+			e.printStackTrace();
+			return new JsonResult(8,e);
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult(e);
+		}
+		
+	}
+	@RequestMapping("/showLikeNote.do")
+	@ResponseBody
+	public JsonResult showLikeNote(String userId){
+		List<Note> notes = noteService.loadLikeNote(userId);
+		return new JsonResult(notes);
+	}
+	
 }

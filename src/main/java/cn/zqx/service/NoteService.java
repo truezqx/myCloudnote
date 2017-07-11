@@ -15,6 +15,7 @@ public interface NoteService {
 	List<Note> loadRollbackNote(String userId);
 	Note replayNote(String noteId);
 	boolean deleteById(String userId,String noteId);
-
+	Note likeNote(String userId,String shareId);
+	List<Note> loadLikeNote(String userId);
 	
 }

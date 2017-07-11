@@ -80,6 +80,8 @@
 						
 					}
 				});
+				//弹出收藏笔记对话框
+				$("#share_ul").on("click","#like_note",alertLikeNote);
 				//预览显示分享笔记内容
 				$("#share_ul").on("click","li",loadShareNote);
 				
@@ -133,14 +135,24 @@
 				$("#rollback_ul").on("click",".btn_delete",alertDeleteRollback);
 				//彻底删除笔记
 				$("#can").on("click","#delete_note",deleteNote);
-				//收藏笔记界面显示
-				$("#like_button").click(function(){
-					$("#pc_part_2").hide();
-					$("#pc_part_4").hide();
-					$("#pc_part_6").hide();
-					$("#pc_part_8").hide();
-					$("#pc_part_7").show();
-				});
+				//收藏笔记
+				$("#can").on("click","#collection",likeNote)
+				//加载收藏笔记
+				$("#like_button").click(loadLikeNote);
+				//显示收藏笔记内容
+				$("#like_ul").on("click","li",showLikeNote);
+				//显示取消收藏对话框
+				$("#like_ul").on("click","#like_note",alertDeleteLike);
+				//取消收藏
+				$("#can").on("click","#delete_like",deleteLike);
+				//双击显示修改笔记本对话框
+				$("#book_ul").on("dblclick","li",alertRename);
+				//重命名笔记本
+				$("#can").on("click","#rename",renameBook);
+				//弹出删除笔记本对话框
+				$("#book_ul").on("click","#delete_book",alertDeleteBook);
+				//删除笔记本
+				$("#can").on("click","#delete_book",deleteBook);
 				
 				//活动笔记显示
 				$("#action_button").click(function(){
@@ -153,45 +165,7 @@
 				
 				
 				
-				/*
-				//弹出删除对话框
-				$("#rollback_button").click(function(){
-					var $li = $("#note_ul a.checked").parent();
-					if($li.length==0){
-						var $li = $("#book_ul a.checked").parent();
-						if($li.length==0){
-							alert("请先选择笔记本或笔记");
-						}else{
-							alertDeleteBook();
-						}
-					}else{
-						alertDeleteNote();
-					}
-					
-				});
 				
-				//删除笔记本
-				$("#can").on("click","#delete_book",function(){
-					var $li = $("#book_ul a.checked").parent();
-					var bookId = $li.data("bookId");
-					var userId = getCookie("userId");
-					$.ajax({
-						url:path+"book/removebook.do",
-						type:"post",
-						data:{"bookId":bookId,"userId":userId},
-						dataType:"json",
-						success:function(result){
-							if(result.state==0){
-								
-							}
-						},
-						error:function(){
-							alert("删除笔记失败！")
-						}
-					});
-					
-				});
-				*/
 			});
 		</script>
 		
@@ -212,7 +186,7 @@
                     <ul class="dropdown-menu animated flipInX pull-right" role="menu">
                         <li><a href="Change_password.html"><i class="fa fa-user"></i> 修改密码</a></li>
                         <li class="divider"></li>
-                        <li><a id="logout" href="#" ><i class="fa fa-sign-out"></i> 退出登录</a></li>
+                        <li><a id="logout" href="log_in.html" ><i class="fa fa-sign-out"></i> 退出登录</a></li>
                     </ul>
                 </div>
             </div>
@@ -325,7 +299,7 @@
 					<div class="module" data-toggle="niceScroll">
 						<div class="chat-contact">
 							<div class="contact-body">
-								<ul class="contacts-list">
+								<ul class="contacts-list" id="like_ul">
 									<!--li class="idle"><a ><i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> switch多分支结构<button type="button" class="btn btn-default btn-xs btn_position btn_delete"><i class="fa fa-times"></i></button></a></li-->
 								</ul>
 							</div>

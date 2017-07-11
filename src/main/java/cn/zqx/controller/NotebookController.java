@@ -46,21 +46,24 @@ public class NotebookController extends BaseController{
 		}
 	}
 	
-	@RequestMapping("/removebook.do")
+	
+	@RequestMapping("/rename.do")
 	@ResponseBody
-	public JsonResult removebook(String userId,String bookId){
+	public JsonResult rename(String bookName,String bookId){
 		try{
-			Notebook notebook = notebookService.removeBook(userId, bookId);
+			Notebook notebook = notebookService.renameBook(bookName, bookId);
 			return new JsonResult(notebook);
-		}catch(UserNotFoundException e){
-			e.printStackTrace();
-			return new JsonResult(4,e);
 		}catch(NotebookNotFoundException e){
 			e.printStackTrace();
-			return new JsonResult(5,e);
-		}catch(Exception e){
-			e.printStackTrace();
-			return new JsonResult(6,e);
+			return new JsonResult(2,e);
 		}
+		
+	}
+	
+	@RequestMapping("/deletebook.do")
+	@ResponseBody
+	public JsonResult deletebook(String bookId){
+		boolean success = notebookService.deleteBook(bookId);
+		return new JsonResult(success);
 	}
 }

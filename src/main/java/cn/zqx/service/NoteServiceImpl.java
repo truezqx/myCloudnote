@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import cn.zqx.dao.NoteDao;
 import cn.zqx.dao.NotebookDao;
+import cn.zqx.dao.ShareDao;
 import cn.zqx.entity.Note;
 import cn.zqx.entity.Notebook;
+import cn.zqx.entity.Share;
 import cn.zqx.util.NoteUtil;
 
 @Service("noteService")
@@ -19,6 +21,8 @@ public class NoteServiceImpl implements NoteService{
 	private NoteDao noteDao;
 	@Resource
 	private NotebookDao notebookDao;
+	@Resource
+	private ShareDao shareDao;
 	public List<Map> loadNotes(String bookId)  throws NotebookNotFoundException{
 		if(bookId==null||bookId.trim().isEmpty()){
 			throw new NotebookNotFoundException("ID为空");
@@ -140,7 +144,43 @@ public class NoteServiceImpl implements NoteService{
 		return rows>=1;
 	}
 
+	public Note likeNote(String userId,String shareId) {
+		if(userId==null||userId.trim().isEmpty()){
+			throw new UserNotFoundException("用户ID为空");
+		}
+		Share share = shareDao.findById(shareId);
+		String noteId=share.getCn_note_id();
+		System.out.println(noteId);
+		Note note = noteDao.findNoteById(noteId);
+		if(userId.equals(note.getCn_user_id())){
+			throw new UserNotFoundException("笔记已收藏或已在笔记列表中");
+		}
+		note = new Note();
+		note.setCn_user_id(userId);
+		note.setCn_note_id(NoteUtil.createId());
+		note.setCn_notebook_id(null);
+		note.setCn_note_title(share.getCn_share_title());
+		note.setCn_note_body(share.getCn_share_body());
+		note.setCn_note_status_id("3");
+		note.setCn_note_type_id("3");
+		Long time = System.currentTimeMillis();
+		note.setCn_note_create_time(time);
+		note.setCn_note_last_modify_time(null);
+		int rows = noteDao.addNote(note);
+		if(rows>=1){
+			return note;
+		}
+		return null;
+	}
 
+	public List<Note> loadLikeNote(String userId) {
+		if(userId==null||userId.trim().isEmpty()){
+			throw new UserNotFoundException("用户ID为空");
+		}
+		List<Note> notes = noteDao.likeNote(userId);
+		
+		return notes;
+	}
 	
 
 }

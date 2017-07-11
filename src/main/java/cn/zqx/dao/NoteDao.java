@@ -17,4 +17,5 @@ public interface NoteDao {
 	public List<Note> findRollbackNote(String userId);
 	public int replayNote(String noteId);
 	public int deleteById(String noteId);
+	public List<Note> likeNote(String userId);
 }

@@ -75,3 +75,22 @@ function alertDeleteRollback(){
 	$("#can").load("alert/alert_delete_rollback.html");
 	$(".opacity_bg").show();
 }
+
+function alertLikeNote(){
+	$("#can").load("alert/alert_like.html");
+	$(".opacity_bg").show();
+}
+
+function alertDeleteLike(){
+	$("#can").load("alert/alert_delete_like.html");
+	$(".opacity_bg").show();
+}
+function alertRename(){
+	$("#can").load("alert/alert_rename.html");
+	$(".opacity_bg").show();
+}
+
+function alertDeleteBook(){
+	$("#can").load("alert/alert_delete_notebook.html");
+	$(".opacity_bg").show();
+}

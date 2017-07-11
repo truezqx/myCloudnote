@@ -33,12 +33,18 @@
 			#{cn_notebook_desc},
 			#{cn_notebook_createtime})
 	</insert>
-	<update id="removeBook" parameterType="cn.zqx.entity.Notebook">
+	<update id="renameBook" parameterType="cn.zqx.entity.Notebook">
 		UPDATE
 			cn_notebook
 		SET
-			cn_notebook_type_id=#{cn_notebook_type_id}
+			cn_notebook_name=#{cn_notebook_name}
 		WHERE
 			cn_notebook_id=#{cn_notebook_id}
 	</update>
+	<delete id="deleteBook" parameterType="String">
+		DELETE FROM
+			cn_notebook
+		WHERE
+			cn_notebook_id=#{bookId}
+	</delete>
 </mapper>

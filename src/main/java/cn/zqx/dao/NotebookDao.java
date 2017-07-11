@@ -8,5 +8,6 @@ public interface NotebookDao {
 	public List<Notebook> findNotebookByUserId(String userId);
 	public Notebook findNotebookById(String notebookId);
 	public int addNotebook(Notebook notebook);
-	public int removeBook(Notebook notebook);
+	public int renameBook(Notebook notebook);
+	public int deleteBook(String bookId);
 }

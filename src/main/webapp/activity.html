@@ -14,7 +14,9 @@
         <link rel="stylesheet" href="styles/icon.css"/>
         <link rel="stylesheet" href="styles/main.css"/>
         <link rel="stylesheet" href="styles/prettify.css"/>
-        
+        <script type="text/javascript" src="scripts/jquery.min.js"></script>
+		  <script type="text/javascript" src="scripts/baseValue.js"></script>
+		  <script type="text/javascript" src="scripts/cookie_util.js"></script>
         <script type="text/javascript">
         	$(function(){
         		//获取用户名
@@ -23,6 +25,7 @@
         	});
         
         </script>
+        
     </head>
     <body class="animated fadeIn">
         <header class="header">
@@ -33,7 +36,7 @@
             </div>
             <div class="header-profile">
                 <div class="profile-nav">
-                    <span class="profile-username">奔XX</span>
+                    <span class="profile-username"></span>
                     <a  class="dropdown-toggle" data-toggle="dropdown">
                         <span class="fa fa-angle-down"></span>
                     </a>
@@ -77,20 +80,22 @@
 			<!-- 活动第三列 -->
 		</div>
         <footer>
-            <p>&copy; 2014 Stilearning</p>
+            <p>&copy; Stilearning</p>
         </footer>
         <script type="text/javascript" src="scripts/jquery.min.js"></script>
 		<!-- Bootstrap框架JS -->
 		<script type="text/javascript" src="scripts/bootstrap.min.js"></script>   
         <script type="text/javascript" src="scripts/theme-setup.js"></script>
-		<!-- 全局变量&&AJAX&&回调函数&&COOKIE -->
-		<script type="text/javascript" src="scripts/BaseValues.js"></script>
+		<!-- 全局变量&&AJAX&&回调函数&&COOKIE 
+		<script type="text/javascript" src="scripts/baseValue.js"></script>
 		<script type="text/javascript" src="scripts/activity/activity.js"></script>
 		<script type="text/javascript" src="scripts/activity/activity_callback.js"></script>
 		<script type="text/javascript" src="scripts/cookie_util.js"></script>
 		<script type="text/javascript" src="scripts/utils.js"></script>
-		<!-- 页面事件处理JS -->
+		-->
+		<!-- 页面事件处理JS 
 		<script type="text/javascript" src='scripts/local.js'></script>
+		-->
 		<script type="text/javascript">
 			function get_dom(e){
 				return document.getElementById(e);
@@ -104,9 +109,8 @@
 			window.onresize=function(){
 				set_height();
 			}
-			window.onload=function(){
-				activity_list();
-			}
+			
 		</script>
+		
     </body>		
 </html>

@@ -57,7 +57,7 @@ function addNotebook(){
 	var ok=true;
 	if(userId==""){
 		ok=false;
-		Window.location.href="log_in.html";
+		window.location.href="log_in.html";
 	}
 	if(bookName==""){
 		ok=false;
@@ -92,7 +92,7 @@ function addNotebook(){
 function renameBook(){
 	var userId=getCookie("userId");
 	if(userId==""){
-		window.location.href("log_in.html");
+		window.location.href="log_in.html";
 	}else{
 		var $li = $("#book_ul a.checked").parent();
 		var bookId = $li.data("bookId");
@@ -128,7 +128,7 @@ function deleteBook(){
 	var bookId = $li.data("bookId");
 	var userId=getCookie("userId");
 	if(userId==""){
-		window.location.href("log_in.html");
+		window.location.href="log_in.html";
 	}else{
 		$.ajax({
 			url:path+"/book/deletebook.do",

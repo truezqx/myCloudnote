@@ -59,5 +59,9 @@ public class UserServiceImpl implements UserService{
 		User user = userDao.findByName(name);
 		return user;
 	}
+	public boolean checkPassword(String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

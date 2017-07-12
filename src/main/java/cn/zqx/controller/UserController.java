@@ -64,6 +64,12 @@ public class UserController extends BaseController{
 		User user = userService.checkName(name);
 		return new JsonResult(user);
 	}
+	
+	@RequestMapping("/checkPassword.do")
+	@ResponseBody
+	public JsonResult checkPassword(String password){
+		return new JsonResult();
+	}
 		
 
 }

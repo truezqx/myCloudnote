@@ -124,7 +124,7 @@
 					var ok=true;
 					if(userId==""){
 						ok=false;
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}
 					if(noteTitle==""){
 						ok=false;
@@ -193,7 +193,7 @@
 					var noteId=$li.data("noteId");
 					var userId=getCookie("userId");
 					if(userId==null){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}
 					$.ajax({
 						url:path+"/note/removeNote.do",
@@ -222,7 +222,7 @@
 					var bookId = $("#moveSelect").val().trim();
 					var userId = getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}
 					if(bookId=="none"){
 						$("#moveSelect_span").html("请选择一个笔记本!");
@@ -254,7 +254,7 @@
 					var noteId = $li.data("noteId");
 					var userId = getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						$.ajax({
 							url:path+"/share/shareNote.do",
@@ -319,7 +319,7 @@
 					var shareId = $li.data("shareId");
 					var userId = getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						$.ajax({
 							url:path+"/share/loadShareNote.do",
@@ -357,7 +357,7 @@
 					$("#pc_part_5").show();
 					var userId = getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						$.ajax({
 							url:path+"/note/loadRollbackNote.do",
@@ -397,7 +397,7 @@
 					var noteId=$("#replaySelect").val().trim();
 					var userId=getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						$.ajax({
 							url:path+"/note/replay.do",
@@ -427,7 +427,7 @@
 					var noteId=$li.data("noteId");
 					alert(noteId);
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						$.ajax({
 							url:path+"/note/deleteNote.do",
@@ -460,7 +460,7 @@
 					var $li = $("#share_ul a.checked").parent();
 					var shareId=$li.data("shareId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						$.ajax({
 							url:path+"/note/likeNote.do",
@@ -530,7 +530,7 @@
 					$("#pc_part_5").show();
 					var userId=getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						var $li = $("#like_ul a.checked").parent();
 						var noteId = $li.data("noteId");
@@ -562,7 +562,7 @@
 				function deleteLike(){
 					var userId=getCookie("userId");
 					if(userId==""){
-						window.location.href("log_in.html");
+						window.location.href="log_in.html";
 					}else{
 						var $li = $("#like_ul a.checked").parent();
 						var noteId=$li.data("noteId");

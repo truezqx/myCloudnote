@@ -89,7 +89,7 @@
 							alert("标题不能为空！");
 					}else{
 						$.ajax({
-							url:path+"/note/updaloadLikeNotete.do",
+							url:path+"/note/updateNote.do",
 							type:"post",
 							data:{"noteId":noteId,"title":title,"body":body},
 							dataType:"json",

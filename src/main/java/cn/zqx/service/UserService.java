@@ -11,5 +11,6 @@ public interface UserService {
 	User Login(String name,String password)throws NameException,PasswordException;
 	User regist(String name,String password,String nick)throws NameException,PasswordException;
 	User checkName(String name);
-	boolean checkPassword(String password);
+	boolean checkPassword(String userId,String password)throws NameException,PasswordException,UserNotFoundException;
+	boolean changePassword(String userId,String npassword);
 }

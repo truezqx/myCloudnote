@@ -36,7 +36,7 @@ function checklogin(){
 							var user = result.data;
 							addCookie("userId",user.cn_user_id,2);
 							addCookie("username",user.cn_user_name,2);
-							window.location.href="edit.html"
+							window.location.href="edit.html";
 						}else if(result.state==2){
 							$("#count_span").html(result.message);
 						}else if(result.state==3){

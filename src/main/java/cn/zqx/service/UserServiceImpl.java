@@ -59,9 +59,31 @@ public class UserServiceImpl implements UserService{
 		User user = userDao.findByName(name);
 		return user;
 	}
-	public boolean checkPassword(String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean checkPassword(String userId,String lpassword)throws NameException,PasswordException,UserNotFoundException {
+		if(userId==null||userId.trim().isEmpty()){
+			throw new NameException("用户名不能为空");
+		}
+		if(lpassword==null||lpassword.trim().isEmpty()){
+			throw new PasswordException("密码不能为空");
+		}
+		User user = userDao.findById(userId);
+		if(user==null){
+			throw new UserNotFoundException("用户不存在");
+		}
+		String pwd = NoteUtil.md5(lpassword);
+		if(user.getCn_user_password().equals(pwd)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public boolean changePassword(String userId, String npassword) {
+		User user = new User();
+		user.setCn_user_id(userId);
+		String pwd = NoteUtil.md5(npassword);
+		user.setCn_user_password(pwd);
+		int rows = userDao.changePassword(user);
+		return rows>=1;
 	}
 
 }

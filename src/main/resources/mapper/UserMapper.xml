@@ -30,4 +30,13 @@
 		where
 				cn_user_id=#{userId}
 	</select>
+	<update id="changePassword" parameterType="cn.zqx.entity.User">
+		UPDATE
+			cn_user
+		SET
+			cn_user_password=#{cn_user_password}
+		WHERE
+			cn_user_id=#{cn_user_id}
+		
+	</update>
 </mapper>

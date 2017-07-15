@@ -6,4 +6,5 @@ public interface UserDao {
 	public User findByName(String name);
 	public void addUser(User user);
 	public User findById(String userId);
+	public int changePassword(User user);
 }

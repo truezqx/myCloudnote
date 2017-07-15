@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.zqx.entity.User;
 import cn.zqx.service.NameException;
 import cn.zqx.service.PasswordException;
+import cn.zqx.service.UserNotFoundException;
 import cn.zqx.service.UserService;
 import cn.zqx.util.JsonResult;
 
@@ -67,8 +68,27 @@ public class UserController extends BaseController{
 	
 	@RequestMapping("/checkPassword.do")
 	@ResponseBody
-	public JsonResult checkPassword(String password){
-		return new JsonResult();
+	public JsonResult checkPassword(String userId,String lpassword){
+		try{
+			boolean success = userService.checkPassword(userId, lpassword);
+			return new JsonResult(success);
+		}catch(NameException e){
+			e.printStackTrace();
+			return new JsonResult(2,e);
+		}catch(PasswordException e){
+			e.printStackTrace();
+			return new JsonResult(2,e);
+		}catch(UserNotFoundException e){
+			e.printStackTrace();
+			return new JsonResult(2,e);
+		}
+		
+	}
+	@RequestMapping("/changePassword.do")
+	@ResponseBody
+	public JsonResult changePassword(String userId,String npassword){
+		boolean success = userService.changePassword(userId, npassword);
+		return new JsonResult(success);
 	}
 		
 

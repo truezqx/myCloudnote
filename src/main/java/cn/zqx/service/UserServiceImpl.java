@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService{
 		}
 		
 	}
+	
 	@Transactional
 	public User regist(String name, String password, String nick) throws NameException, PasswordException {
 		User user = userDao.findByName(name);
